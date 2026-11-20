@@ -50,10 +50,16 @@ export default function HealthBadge() {
 
   const modelLoaded = health.model_loaded
   const statusOk = health.status === 'ok' || health.status === 'healthy'
+  const classList = health.classes
+    ? (Array.isArray(health.classes)
+        ? health.classes
+        : Object.values(health.classes)
+      ).join(', ')
+    : 'None'
 
   return (
     <div
-      title={`Model: ${health.model_path || 'unknown'}\nClasses: ${(health.classes || []).join(', ')}`}
+      title={`Model: ${health.model_path || 'unknown'}\nClasses: ${classList}`}
       className={`flex items-center gap-2 backdrop-blur-sm rounded-full px-3 py-1.5 cursor-default transition-colors ${
         statusOk && modelLoaded
           ? 'bg-green-500/20 border border-green-400/30'
