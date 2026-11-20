@@ -48,6 +48,7 @@ pnpm-debug.log*
 
 # ── Models — large binary files ───────────────────────────────
 models/*.pt
+!models/best.pt
 models/*.onnx
 models/*.torchscript
 models/*.engine
