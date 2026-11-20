@@ -1,0 +1,34 @@
+# ============================================================
+# Dataset Configuration — Insulator Defect Detection
+# Dataset: CPLID (Chinese Power Line Insulator Dataset)
+# ============================================================
+
+# Paths — relative to this file's location (or absolute)
+path: ../datasets/CPLID_Final   # root dataset directory
+train: images/train             # train images subfolder
+val:   images/val               # validation images subfolder
+test:  images/test              # test images subfolder (optional)
+
+# Classes
+nc: 2
+names:
+  0: defect
+  1: insulator
+
+# ── Notes ────────────────────────────────────────────────────
+# Expected directory layout:
+#
+#   datasets/CPLID_Final/
+#   ├── images/
+#   │   ├── train/   *.jpg / *.png
+#   │   ├── val/
+#   │   └── test/
+#   └── labels/
+#       ├── train/   *.txt  (YOLO format: class cx cy w h)
+#       ├── val/
+#       └── test/
+#
+# Download / preparation:
+#   make data
+# or manually run:
+#   python scripts/prepare_dataset.py

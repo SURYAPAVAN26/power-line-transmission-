@@ -1,0 +1,104 @@
+# ============================================================
+# .gitignore — Insulator Defect Detection Project
+# ============================================================
+
+# ── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environments ──────────────────────────────────────
+.venv/
+venv/
+ENV/
+env/
+.env
+!api/.env.example
+
+# ── Jupyter ───────────────────────────────────────────────────
+.ipynb_checkpoints
+*.ipynb
+
+# ── Node / npm / pnpm ─────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+*.tsbuildinfo
+
+# ── Models — large binary files ───────────────────────────────
+models/*.pt
+models/*.onnx
+models/*.torchscript
+models/*.engine
+models/*.tflite
+models/*.pb
+# Keep the directory itself
+!models/.gitkeep
+
+# ── Datasets — large data files ───────────────────────────────
+datasets/
+!datasets/.gitkeep
+
+# ── Training runs / artefacts ─────────────────────────────────
+runs/
+wandb/
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDE ───────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Docker ────────────────────────────────────────────────────
+*.dockerignore
+
+# ── Misc ──────────────────────────────────────────────────────
+*.log
+*.pid
+*.seed
+*.bak
+*.tmp
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.cover

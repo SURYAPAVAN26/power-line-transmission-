@@ -1,0 +1,33 @@
+# ============================================================
+# Augmentation Config — Insulator Defect Detection (YOLOv8)
+# Aggressive augmentation tuned for aerial insulator imagery:
+#   - High-contrast sky backgrounds
+#   - Small defect regions
+#   - Viewpoint & lighting variation
+# ============================================================
+
+# ── HSV colour jitter ────────────────────────────────────────
+hsv_h: 0.015        # hue shift fraction          (default 0.015)
+hsv_s: 0.7          # saturation fraction         (default 0.7)
+hsv_v: 0.4          # value (brightness) fraction (default 0.4)
+
+# ── Geometric transforms ─────────────────────────────────────
+degrees: 15.0       # random rotation ± degrees   (default 0.0)
+translate: 0.1      # image translation ± fraction (default 0.1)
+scale: 0.6          # image scale ± gain           (default 0.5)
+shear: 5.0          # shear ± degrees              (default 0.0)
+perspective: 0.0005 # perspective distortion       (default 0.0)
+
+# ── Flip ─────────────────────────────────────────────────────
+flipud: 0.3         # vertical flip probability    (default 0.0)
+fliplr: 0.5         # horizontal flip probability  (default 0.5)
+
+# ── Mosaic / mixup / copy-paste ──────────────────────────────
+mosaic: 1.0         # mosaic augmentation prob     (default 1.0)
+mixup: 0.15         # mixup augmentation prob      (default 0.0)
+copy_paste: 0.3     # copy-paste augmentation prob (default 0.0)
+
+# ── Auto augment / erasing ───────────────────────────────────
+auto_augment: randaugment   # policy: randaugment | augmix | autoaugment
+erasing: 0.4        # random erasing probability   (default 0.4)
+crop_fraction: 1.0  # fraction of image for crop   (default 1.0)
