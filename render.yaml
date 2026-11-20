@@ -2,7 +2,7 @@ services:
   - type: web
     name: insulator-defect-detector-api
     runtime: docker
-    dockerfilePath: docker/Dockerfile.api
+    dockerfilePath: Dockerfile
     dockerContext: .
     plan: free
     healthCheckPath: /health

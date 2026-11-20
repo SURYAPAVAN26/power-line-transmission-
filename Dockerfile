@@ -1,0 +1,44 @@
+# ============================================================
+# Dockerfile — Insulator Defect Detection API
+# Base: python:3.11-slim | Server: uvicorn
+# ============================================================
+FROM python:3.11-slim
+
+# ── System deps ──────────────────────────────────────────────
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libgl1 \
+        libglib2.0-0 \
+        libsm6 \
+        libxrender1 \
+        libxext6 \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# ── Python deps (layer-cached) ───────────────────────────────
+COPY api/requirements.txt ./requirements.txt
+# Install CPU-only torch first to keep image lightweight and fast on cloud builds
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir -r requirements.txt
+
+# ── Application code ─────────────────────────────────────────
+COPY api/ ./api/
+
+# ── Models volume mount point ─────────────────────────────────
+RUN mkdir -p /app/models
+
+# ── Environment defaults ─────────────────────────────────────
+ENV MODEL_PATH=/app/models/best.pt \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PORT=8000
+
+EXPOSE 8000
+
+# ── Health check ──────────────────────────────────────────────
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
+
+# ── Run (supports Render dynamic $PORT and local Docker Compose) ─
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]
